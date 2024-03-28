@@ -1,7 +1,7 @@
 const { userCache,groupCache } = require("../middlewares/cache");
-const authMiddleware = require("../middlewares/auth");
+const {authMiddleware} = require("../middlewares/auth");
 const Group = require("../../db/schema/group");
-const client = require("../../redis/redisClient");
+const {client} = require("../../redis/redisClient");
 const {router} = require("../router")
 const {replaceGroupCache} = require("../../nats/pub/replaceGC");
 
