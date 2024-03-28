@@ -1,0 +1,105 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API REST avec Node.js, MongoDB, et Redis",
+    "version": "1.0.0",
+    "description": "Une simple API REST pour la gestion des utilisateurs avec cache Redis."
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000",
+      "description": "Serveur de développement local"
+    }
+  ],
+  "paths": {
+    "/user/{id}": {
+      "get": {
+        "summary": "Récupère un utilisateur via son UUID",
+        "parameters": [
+          {
+            "name": "UUID",
+            "in": "path",
+            "required": true,
+            "description": "UUID de l'utilisateur à récupérer",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Utilisateur récupéré avec succès",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Utilisateur non trouvé"
+          }
+        }
+      }
+    },
+    "/user": {
+      "post": {
+        "summary": "Crée un nouvel utilisateur",
+        "requestBody": {
+          "description": "Objet utilisateur à créer",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Utilisateur créé",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Requête invalide"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "User": {
+        "type": "object",
+        "properties": {
+          "UUID": {
+            "type": "string",
+            "description": "Identifiant unique de l'utilisateur"
+          },
+          "Name": {
+            "type": "string",
+            "description": "Nom de l'utilisateur"
+          },
+          "Token": {
+            "type": "string",
+            "description": "Token d'authentification de l'utilisateur"
+          },
+          "Logon": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date de connexion de l'utilisateur"
+          }
+        },
+        "required": ["UUID", "Name", "Token"]
+      }
+    }
+  }
+}
