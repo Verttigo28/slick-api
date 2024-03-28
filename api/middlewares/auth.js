@@ -1,6 +1,6 @@
 const APIToken = process.env.API_TOKEN
 const authMiddleware = (req, res, next) => {
-    const token = req.headers['token'];
+    const token = req.headers.Authorization;
     if (token === APIToken) {
         next();
     } else {
