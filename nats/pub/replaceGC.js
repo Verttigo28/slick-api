@@ -1,8 +1,11 @@
-const {publisher} = require("../redisClient")
+const {nc} = require("../../nats/natsClient")
+const {JSONCodec} = require("nats");
+
+const jc = JSONCodec();
 
 //Pub/Sub Event name = RGC
 exports.replaceGroupCache = (json) => {
-    publisher.publish("RGC", json);
+    nc.publish("RGC", jc.encode(json));
 }
 
 //The client will have to store group cache and replace it.

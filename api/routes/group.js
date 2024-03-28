@@ -3,7 +3,7 @@ const authMiddleware = require("../middlewares/auth");
 const Group = require("../../db/schema/group");
 const client = require("../../redis/redisClient");
 const {router} = require("../router")
-const {replaceGroupCache} = require("../../redis/pub/replaceGC");
+const {replaceGroupCache} = require("../../nats/pub/replaceGC");
 
 
 router.get('/group/:id', [authMiddleware, groupCache], async (req, res) => {
