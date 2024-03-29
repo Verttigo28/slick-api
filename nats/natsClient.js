@@ -1,4 +1,4 @@
-const {connect, JSONCodec} = require("nats");
+const {connect} = require("nats");
 
 const nc = await connect({servers: process.env.nats_url, token: process.env.nats_token});
 

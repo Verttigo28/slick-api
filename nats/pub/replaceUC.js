@@ -10,4 +10,5 @@ exports.replaceUserCache = (json) => {
 
 //The client will have to store user cache and replace it.
 //If client has the user in cache, update it.
-//Admin has two choice to update group : 1. With a command, 2. From the DB and then run /sapi reload group
+//Event driven model
+//Admin has two choice to update group : 1. With a command, 2. From the DB and then run /sapi reload users
