@@ -1,8 +1,11 @@
-const {closeNATS} = require("./nats/natsClient");
-loadApp = () => {
-    require("./redis/redisClient")
-    require("./db/dbClient")
+require('dotenv').config()
+const {closeNATS, startNats} = require("./nats/natsClient");
+const {connectMongo} = require("./db/dbClient");
+loadApp = async () => {
     require("./api/router")
+    require("./redis/redisClient");
+    await startNats()
+    await connectMongo()
 }
 loadApp();
 

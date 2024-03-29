@@ -1,23 +1,23 @@
-const {client} = require("../../redis/redisClient");
+const client= require("../../redis/redisClient");
 
 const userCache = (req, res, next) => {
-    const {uuid} = req.params;
-    client.get(uuid).then((err, data) => {
-        if (err) throw err;
+    const uuid = req.query.uuid;
+    client.get(uuid).then((data) => {
         if (data != null) {
-            res.send(data);
+            console.log("ICI")
+            res.json(JSON.parse(data));
         } else {
+            console.log("la")
             next();
         }
     })
 };
 
 const groupCache = (req, res, next) => {
-    const {id} = req.params;
-    client.get(id).then((err, data) => {
-        if (err) throw err;
+    const id = req.query.id;
+    client.get(id).then((data) => {
         if (data != null) {
-            res.send(data);
+            res.json(JSON.parse(data));
         } else {
             next();
         }
