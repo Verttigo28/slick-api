@@ -1,11 +1,13 @@
-const {nc} = require("../../nats/natsClient")
+const nc = require("../../nats/natsClient")
 const {JSONCodec} = require("nats");
 
 const jc = JSONCodec();
 
 //Pub/Sub Event name = RUC
 exports.replaceUserCache = (json) => {
-    nc.publish("RUC", jc.encode(json));
+    nc.then((nats) => {
+        nats.publish("RUC", jc.encode(json));
+    })
 }
 
 //The client will have to store user cache and replace it.
